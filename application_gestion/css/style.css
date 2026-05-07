@@ -1,0 +1,162 @@
+/**
+* Style adapté par avec Gemini IA
+*/
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #fff;
+    color: #000;
+    padding: 40px 60px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 1rem;
+    color: #444;
+}
+
+.conteneur {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.section {
+    flex: 1;
+}
+
+.diviseur {
+    width: 1px;
+    background: #ccc;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+h2 {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-bottom: 24px;
+}
+
+.champ {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #aaa;
+    font-size: 0.95rem;
+    outline: none;
+    background: #fff;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #000;
+}
+
+.champ-mdp {
+    position: relative;
+}
+
+.champ-mdp input {
+    padding-right: 40px;
+}
+
+.toggle-mdp {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #666;
+    padding: 0;
+}
+
+.champ-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.champ-checkbox input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.btn {
+    display: block;
+    margin-left: auto;
+    padding: 10px 28px;
+    background: #fff;
+    border: 1px solid #000;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-family: Georgia, serif;
+}
+
+.btn:hover {
+    background: #f0f0f0;
+}
+
+.message {
+    margin-top: 16px;
+    font-size: 0.88rem;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    display: none;
+}
+
+.message.succes {
+    border-color: #4a4;
+    color: #2a6a2a;
+    background: #f0fff0;
+    display: block;
+}
+
+.message.erreur {
+    border-color: #a44;
+    color: #6a2a2a;
+    background: #fff0f0;
+    display: block;
+}
+
+.cle-api {
+    font-family: monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+    margin-top: 4px;
+}

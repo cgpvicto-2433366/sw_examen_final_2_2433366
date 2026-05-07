@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Épreuve finale - Services Web H26</title>
+    <link rel="stylesheet" href="css/style.css">
+        <script defer src="js/script.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Épreuve finale - Services Web H26</h1>
+        <p>Ben Schalom KAMGA</p>
+    </header>
+
+    <div class="conteneur">
+
+        <!-- Création d'une bibliothèque -->
+        <section class="section">
+            <h2>Création d'une bibliothèque</h2>
+
+            <div class="champ">
+                <label for="nom">Nom de la bibliothèque</label>
+                <input type="text" id="nom" placeholder="Votre bibliothèque">
+            </div>
+
+            <div class="champ">
+                <label for="email-creation">Courriel</label>
+                <input type="email" id="email-creation" placeholder="Votre courriel">
+            </div>
+
+            <div class="champ">
+                <label for="mdp-creation">Mot de passe</label>
+                <div class="champ-mdp">
+                    <input type="password" id="mdp-creation">
+                    <button class="toggle-mdp" type="button">afficher</button>
+                </div>
+            </div>
+
+            <button class="btn" id="btn-creation">Créer</button>
+
+            <div class="message" id="msg-creation"></div>
+        </section>
+
+        <div class="diviseur"></div>
+
+        <!-- Récupération d'une clé api -->
+        <section class="section">
+            <h2>Récupération d'une clé api</h2>
+
+            <div class="champ">
+                <label for="email-connexion">Courriel</label>
+                <input type="email" id="email-connexion" placeholder="Votre courriel">
+            </div>
+
+            <div class="champ">
+                <label for="mdp-connexion">Mot de passe</label>
+                <div class="champ-mdp">
+                    <input type="password" id="mdp-connexion">
+                    <button class="toggle-mdp" type="button">afficher</button>
+                </div>
+            </div>
+
+            <div class="champ-checkbox">
+                <input type="checkbox" id="nouveau">
+                <label for="nouveau" style="margin-bottom:0">Générer une nouvelle clé</label>
+            </div>
+
+            <button class="btn" id="btn-connexion">Récupérer</button>
+
+            <div class="message" id="msg-connexion"></div>
+        </section>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,1189 @@
+{
+  "info": {
+    "_postman_id": "ebe4a9d2-34d6-4b96-9fd3-0784960c2aad",
+    "name": "sw_épreuvefinale_2433366",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51577556",
+    "_collection_link": "https://go.postman.co/collection/51577556-ebe4a9d2-34d6-4b96-9fd3-0784960c2aad?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Livres",
+      "item": [
+        {
+          "name": "liste de livre disponible (succès)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/liste",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "liste"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "liste de livre (succès)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/liste?tous=1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "liste"
+              ],
+              "query": [
+                {
+                  "key": "tous",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Details d'un livre (succès)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/2",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Details d'un livre (livre inexistant)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/7",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Details d'un livre (Numéro Id invalide)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/bnnn",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "bnnn"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter un livre (succes)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"livre03\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter un livre (champ obligatoire manquant)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"livre01\",\r\n  \"isbn\": \"978-0132350889\",\r\n  \"description\": \"Guide de bonnes pratiques en programmation\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter un livre (Isbn deja utilisé)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"livre02\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350889\",\r\n  \"description\": \"Guide de bonnes pratiques en programmation\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un livre (succes)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"Clean Code\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350884\",\r\n  \"description\": \"Test description, modifier\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier statut un livre (succes)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"disponible\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier statut un livre (id invalide)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"disponible\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1666",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1666"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un livre (id invalide)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"Clean Code\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350884\",\r\n  \"description\": \"Test description, modifier\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/6789",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "6789"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un livre (champ manquant)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"Clean Code\",\r\n  \"description\": \"Test description, modifier\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un livre (isbn duplique)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titre\": \"Clean Code\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0262033848\"\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimé un livre (succes)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/1",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un livre (id invalide)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/900",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "900"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "prets",
+      "item": [
+        {
+          "name": "Creer un pret (succes)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"livreId\": 3,\r\n  \"emprunteur\": \"Jean Dupont\",\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change le statut d'un pret (terminer - succes)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"terminer\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/3",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change le statut d'un pret (reactiver - succes)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"terminer\": \"0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/3",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change le statut d'un pret (id invalide)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"terminer\": \"0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/5999",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "5999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Creer un pret (champ manquant)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"livreId\": 3,\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Creer un pret (livre non disponible)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"livreId\": 3,\r\n  \"emprunteur\": \"Jean Dupont\",\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un pret existant (succes)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"terminer\": \"0\"\r\n}"
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/1",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un pret existant (id invalide)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"terminer\": \"0\"\r\n}"
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/40000",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "40000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (succes)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/4",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (sans cle API)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/4",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (le pret n'appartient pas a la bibliotheque)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/2",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (index invalide)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/iii",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "iii"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (index non trouvé)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/90",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "90"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un pret (champ manquant)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/4",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Utilisateurs",
+      "item": [
+        {
+          "name": "Local: Ajouter une bibliothèque (succes)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom\": \"Bibliothèque test01\",\r\n  \"email\": \"test01@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/inscription",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "inscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Ajouter une bibliothèque (email invalide)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom\": \"Bibliothèque test01\",\r\n  \"email\": \"test01qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/inscription",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "inscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Ajouter une bibliothèque (champ manquant)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom\": \"Bibliothèque test01\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/inscription",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "inscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Ajouter une bibliothèque (Email déja utilisé)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom\": \"Bibliothèque test01\",\r\n  \"email\": \"test01@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/inscription",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "inscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Connecter une bibliothèque (succes)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test01@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/connexion",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "connexion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Connecter une bibliothèque (generer nouvel cle)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test01@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/connexion?nouveau=1",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "connexion"
+              ],
+              "query": [
+                {
+                  "key": "nouveau",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Connecter une bibliothèque (email inexistant)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test100@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePasse123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/connexion",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "connexion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local: Connecter une bibliothèque (mauvais mot de passe)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test01@bibliotheque.qc.ca\",\r\n  \"mdp\": \"MotDePa123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{utilisateur_url}}/connexion",
+              "host": [
+                "{{local_base_url}}{{utilisateur_url}}"
+              ],
+              "path": [
+                "connexion"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentification",
+      "item": [
+        {
+          "name": "Routes securisé (sans clé API)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/liste",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "liste"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Routes securisé (cle api invalide)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "test",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/liste",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "liste"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Journalisation erreur 500",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"emprunteur\": \"Marie Tremblay\",\r\n  \"dateRetourPrevue\": \"2026-07-01\"\r\n}"
+        },
+        "url": {
+          "raw": "{{local_base_url}}/api/bibliotheque/tests/test-500",
+          "host": [
+            "{{local_base_url}}"
+          ],
+          "path": [
+            "api",
+            "bibliotheque",
+            "tests",
+            "test-500"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

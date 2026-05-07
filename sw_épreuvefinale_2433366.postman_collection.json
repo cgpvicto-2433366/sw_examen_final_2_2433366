@@ -263,7 +263,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"disponible\": \"1\"\r\n}",
+              "raw": "{\r\n  \"disponible\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -295,7 +295,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"disponible\": \"1\"\r\n}",
+              "raw": "{\r\n  \"disponible\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -511,7 +511,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"terminer\": \"1\"\r\n}",
+              "raw": "{\r\n  \"terminer\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -519,12 +519,12 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}{{pret_url}}/3",
+              "raw": "{{local_base_url}}{{pret_url}}/1",
               "host": [
                 "{{local_base_url}}{{pret_url}}"
               ],
               "path": [
-                "3"
+                "1"
               ]
             }
           },
@@ -543,7 +543,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"terminer\": \"0\"\r\n}",
+              "raw": "{\r\n  \"terminer\": false\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -551,12 +551,12 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}{{pret_url}}/3",
+              "raw": "{{local_base_url}}{{pret_url}}/1",
               "host": [
                 "{{local_base_url}}{{pret_url}}"
               ],
               "path": [
-                "3"
+                "1"
               ]
             }
           },
@@ -575,7 +575,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"terminer\": \"0\"\r\n}",
+              "raw": "{\r\n  \"terminer\": false\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -665,7 +665,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"terminer\": \"0\"\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "{{local_base_url}}{{pret_url}}/1",
@@ -692,7 +692,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"terminer\": \"0\"\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "{{local_base_url}}{{pret_url}}/40000",
@@ -727,12 +727,12 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}{{pret_url}}/4",
+              "raw": "{{local_base_url}}{{pret_url}}/3",
               "host": [
                 "{{local_base_url}}{{pret_url}}"
               ],
               "path": [
-                "4"
+                "3"
               ]
             }
           },

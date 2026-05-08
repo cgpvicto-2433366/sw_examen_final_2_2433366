@@ -87,6 +87,7 @@ INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, descriptio
 (1, 'Soft Skills', 'John Sonmez', '978-1617292392', true, 'Le guide de vie du développeur'),
 (1, 'Rust in Action', 'Tim McNamara', '978-1617297120', true, 'Programmation système moderne');
 
+-- Bibliothèque 2 (Victoriaville) - IDs 11 à 20
 INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, description) VALUES
 (2, 'Introduction aux algorithmes', 'Thomas H. Cormen', '978-0262033848', false, 'Référence en algorithmique'), -- Prêté
 (2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', '978-2070612758', false, 'Conte philosophique'),            -- Prêté

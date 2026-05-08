@@ -74,12 +74,12 @@
               }
             ],
             "url": {
-              "raw": "{{local_base_url}}{{livre_url}}/2",
+              "raw": "{{local_base_url}}{{livre_url}}/1",
               "host": [
                 "{{local_base_url}}{{livre_url}}"
               ],
               "path": [
-                "2"
+                "1"
               ]
             }
           },
@@ -97,12 +97,12 @@
               }
             ],
             "url": {
-              "raw": "{{local_base_url}}{{livre_url}}/7",
+              "raw": "{{local_base_url}}{{livre_url}}/9999999",
               "host": [
                 "{{local_base_url}}{{livre_url}}"
               ],
               "path": [
-                "7"
+                "9999999"
               ]
             }
           },
@@ -144,7 +144,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"titre\": \"livre03\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"test\"\r\n}",
+              "raw": "{\r\n  \"titre\": \"Test\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"test\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -202,7 +202,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"titre\": \"livre02\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350889\",\r\n  \"description\": \"Guide de bonnes pratiques en programmation\"\r\n}",
+              "raw": "{\r\n  \"titre\": \"livre02\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"Guide de bonnes pratiques en programmation\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -251,7 +251,7 @@
           "response": []
         },
         {
-          "name": "Modifier statut un livre (succes)",
+          "name": "Modifier statut un livre en prets pour le rendre disponible (echec car il est fait manuellement)",
           "request": {
             "method": "PATCH",
             "header": [
@@ -277,6 +277,38 @@
               ],
               "path": [
                 "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier statut un livre disponible (succes)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"disponible\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/4",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "4"
               ]
             }
           },
@@ -379,7 +411,7 @@
           "response": []
         },
         {
-          "name": "Modifier un livre (isbn duplique)",
+          "name": "Modifier ISBN d'un livre (isbn duplique)",
           "request": {
             "method": "PUT",
             "header": [
@@ -411,7 +443,7 @@
           "response": []
         },
         {
-          "name": "Supprimé un livre (succes)",
+          "name": "Supprimé un livre en cours de prêts (echec)",
           "request": {
             "method": "DELETE",
             "header": [
@@ -432,6 +464,33 @@
               ],
               "path": [
                 "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimé un livre disponible (succes)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{livre_url}}/10",
+              "host": [
+                "{{local_base_url}}{{livre_url}}"
+              ],
+              "path": [
+                "10"
               ]
             }
           },
@@ -470,7 +529,7 @@
       "name": "prets",
       "item": [
         {
-          "name": "Creer un pret (succes)",
+          "name": "Creer un pret sur un livre indisponible (echec)",
           "request": {
             "method": "POST",
             "header": [
@@ -482,7 +541,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"livreId\": 3,\r\n  \"emprunteur\": \"Jean Dupont\",\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
+              "raw": "{\r\n  \"livreId\": 1,\r\n  \"emprunteur\": \"Jean Dupont\",\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -493,6 +552,38 @@
               "raw": "{{local_base_url}}{{pret_url}}",
               "host": [
                 "{{local_base_url}}{{pret_url}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Creer un pret sur un livre disponible (succes)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{cle_api}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"livreId\": 9,\r\n  \"emprunteur\": \"Jean Dupont\",\r\n  \"dateRetourPrevu\": \"2026-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_base_url}}{{pret_url}}/",
+              "host": [
+                "{{local_base_url}}{{pret_url}}"
+              ],
+              "path": [
+                ""
               ]
             }
           },
@@ -680,7 +771,7 @@
           "response": []
         },
         {
-          "name": "Supprimer un pret existant (id invalide)",
+          "name": "Supprimer un pret inexistant (id invalide)",
           "request": {
             "method": "DELETE",
             "header": [
@@ -785,12 +876,12 @@
               }
             },
             "url": {
-              "raw": "{{local_base_url}}{{pret_url}}/2",
+              "raw": "{{local_base_url}}{{pret_url}}/7",
               "host": [
                 "{{local_base_url}}{{pret_url}}"
               ],
               "path": [
-                "2"
+                "7"
               ]
             }
           },
@@ -1159,7 +1250,7 @@
       ]
     },
     {
-      "name": "Journalisation erreur 500",
+      "name": "Local:Journalisation erreur 500",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },

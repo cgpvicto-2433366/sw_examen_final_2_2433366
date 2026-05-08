@@ -73,16 +73,46 @@ INSERT INTO bibliotheques (nom, courriel, cle_api, password) VALUES
 
 -- livres
 -- Données généré par claude IA
+-- 2. INSERTION DES LIVRES (10 par bibliothèque)
+-- Bibliothèque 1 (Victoriaville) - IDs 1 à 10
 INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, description) VALUES
-(1, 'Clean Code', 'Robert C. Martin', '978-0132350884', true, 'Guide de bonnes pratiques en programmation'),
-(1, 'The Pragmatic Programmer', 'David Thomas', '978-0135957059', false, NULL),
-(1, 'Design Patterns', 'Gang of Four', '978-0201633610', true, NULL),
-(2, 'Introduction aux algorithmes', 'Thomas H. Cormen', '978-0262033848', true, 'Manuel de référence en algorithmique'),
-(2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', '978-2070612758', false, NULL);
+(1, 'Clean Code', 'Robert C. Martin', '978-0132350884', false, 'Guide de bonnes pratiques en programmation'), -- Prêté
+(1, 'The Pragmatic Programmer', 'David Thomas', '978-0135957059', false, 'Conseils pour les développeurs'),           -- Prêté
+(1, 'Design Patterns', 'Gang of Four', '978-0201633610', false, 'Les patrons de conception'),                  -- Prêté
+(1, 'Refactoring', 'Martin Fowler', '978-0134757599', true, 'Améliorer le code existant'),
+(1, 'Code Complete', 'Steve McConnell', '978-0735619678', true, 'Construction logicielle'),
+(1, 'Test Driven Development', 'Kent Beck', '978-0321146533', true, 'Le développement piloté par les tests'),
+(1, 'You Dont Know JS', 'Kyle Simpson', '978-1491904244', true, 'Plongée dans JavaScript'),
+(1, 'Domain-Driven Design', 'Eric Evans', '978-0321125217', true, 'Modélisation métier complexe'),
+(1, 'Soft Skills', 'John Sonmez', '978-1617292392', true, 'Le guide de vie du développeur'),
+(1, 'Rust in Action', 'Tim McNamara', '978-1617297120', true, 'Programmation système moderne');
+
+INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, description) VALUES
+(2, 'Introduction aux algorithmes', 'Thomas H. Cormen', '978-0262033848', false, 'Référence en algorithmique'), -- Prêté
+(2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', '978-2070612758', false, 'Conte philosophique'),            -- Prêté
+(2, 'L''Étranger', 'Albert Camus', '978-2070360024', false, 'Classique de la littérature'),                    -- Prêté
+(2, '1984', 'George Orwell', '978-2070368228', true, 'Dystopie'),
+(2, 'Effective Java', 'Joshua Bloch', '978-0134685991', true, 'Meilleures pratiques Java'),
+(2, 'Python Crash Course', 'Eric Matthes', '978-1593279288', true, 'Apprendre Python rapidement'),
+(2, 'The Rust Programming Language', 'Steve Klabnik', '978-1593278281', true, 'La bible du Rust'),
+(2, 'Modern Operating Systems', 'Andrew Tanenbaum', '978-0133591620', true, 'Systèmes d''exploitation'),
+(2, 'Database Systems', 'Thomas Connolly', '978-0321523068', true, 'Conception de bases de données'),
+(2, 'Artificial Intelligence', 'Stuart Russell', '978-0136042594', true, 'Fondements de l''IA');
 
 -- prêts
 -- Données généré par claude IA
-INSERT INTO prets (livre_id, emprunteur, date_debut, date_retour_prevue) VALUES
-(2, 'Alice Tremblay', '2026-04-01', '2026-04-15'),
-(5, 'Mohamed Diallo', '2026-04-10', '2026-04-24');
+INSERT INTO prets (livre_id, emprunteur, statut, date_debut, date_retour_prevue, date_retour) VALUES
+(1, 'Alice Tremblay', false, '2026-05-01', '2026-05-15', NULL),          -- En cours
+(2, 'Jean Beliveau', false, '2026-05-02', '2026-05-16', NULL),           -- En cours
+(3, 'Marie Curie', false, '2026-05-03', '2026-05-17', NULL),             -- En cours
+(4, 'Pierre Luc', true, '2026-04-01', '2026-04-15', '2026-04-14'),       -- Terminé
+(5, 'Sophie Germain', true, '2026-04-05', '2026-04-19', '2026-04-20'),   -- Terminé
+(6, 'Alan Turing', true, '2026-04-10', '2026-04-24', '2026-04-24');      -- Terminé
 
+INSERT INTO prets (livre_id, emprunteur, statut, date_debut, date_retour_prevue, date_retour) VALUES
+(11, 'Mohamed Diallo', false, '2026-05-01', '2026-05-15', NULL),         -- En cours
+(12, 'Lucie Leclerc', false, '2026-05-04', '2026-05-18', NULL),          -- En cours
+(13, 'Charles Hamelin', false, '2026-05-05', '2026-05-19', NULL),        -- En cours
+(14, 'Julie Masse', true, '2026-03-15', '2026-03-29', '2026-03-28'),     -- Terminé
+(15, 'Marc Labrèche', true, '2026-03-20', '2026-04-03', '2026-04-03'),   -- Terminé
+(16, 'Guy A. Lepage', true, '2026-04-01', '2026-04-15', '2026-04-12');   -- Terminé

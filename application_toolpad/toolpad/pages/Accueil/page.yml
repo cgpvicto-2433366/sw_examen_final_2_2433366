@@ -215,6 +215,147 @@ spec:
           - field: statut
             type: string
             width: 144.00000762939453
+    - component: Text
+      name: SectionPrets
+      props:
+        value: Section Prêts
+        variant: h1
+      layout:
+        verticalAlign: center
+        horizontalAlign: center
+    - component: Text
+      name: TextAjouterPret
+      layout:
+        horizontalAlign: start
+        verticalAlign: end
+      props:
+        value: Ajouter un prêt
+        variant: h4
+    - component: Select
+      name: selectListeLivreDisponible
+      props:
+        label: Livre à emprunter
+        fullWidth: true
+        options:
+          $$jsExpression:
+            "(GetLivresDisponibles.data.livres || []).map(l => ({ value:
+            l.id, label: l.titre }))"
+    - component: TextField
+      name: AjouterEmprunteur
+      props:
+        label: Emprunteur
+        isRequired: true
+    - component: DatePicker
+      name: AjouterDateRetourPrevu
+      props:
+        label: Date de retour prévue
+    - component: Button
+      name: ButtonAjouterPret
+      props:
+        content: Ajouter le prêt
+        disabled:
+          $$jsExpression: >-
+            !selectListeLivreDisponible.value || !AjouterEmprunteur.value ||
+            !AjouterDateRetourPrevu.value
+        onClick:
+          $$jsExpressionAction:
+            AjouterPret.call().then(() => { GetDetailsLivre.call();
+            GetLivresDisponibles.refetch(); })
+    - component: Text
+      name: TextDetailsPretSelectionne
+      props:
+        value: Détails du prêt sélectionné
+        variant: h4
+    - component: TextField
+      name: DetailEmprunteur
+      props:
+        label: Emprunteur
+        disabled: true
+        defaultValue:
+          $$jsExpression: ListePrets.selection.emprunteur
+    - component: TextField
+      name: DetailDateDebut
+      props:
+        label: Date de début
+        disabled: true
+        defaultValue:
+          $$jsExpression: "ListePrets.selection.date_debut ? new
+            Date(ListePrets.selection.date_debut).toLocaleDateString('fr-CA') :
+            ''"
+    - component: TextField
+      name: DetailDateRetourPrevue
+      props:
+        label: Date de retour prévue
+        disabled: true
+        defaultValue:
+          $$jsExpression: "ListePrets.selection.date_retour_prevue ? new
+            Date(ListePrets.selection.date_retour_prevue).toLocaleDateString('f\
+            r-CA') : ''"
+    - component: TextField
+      name: DetailDateRetour
+      props:
+        label: Date de retour effective
+        disabled: true
+        defaultValue:
+          $$jsExpression: "ListePrets.selection.date_retour ? new
+            Date(ListePrets.selection.date_retour).toLocaleDateString('fr-CA') :
+            'Non retourné'"
+    - component: TextField
+      name: DetailStatut
+      props:
+        label: Statut
+        disabled: true
+        defaultValue:
+          $$jsExpression: ListePrets.selection.statut
+    - component: Text
+      name: TextModifierPret
+      props:
+        value: Modifier un prêt sélectionné
+        variant: h4
+    - component: TextField
+      name: ModifierEmprunteur
+      props:
+        label: Emprunteur
+        defaultValue:
+          $$jsExpression: ListePrets.selection.emprunteur
+    - component: DatePicker
+      name: ModifierDateRetourPrevue
+      props:
+        label: Nouvelle date de retour
+    - component: Button
+      name: ButtonModifierPret
+      props:
+        content: Modifier le prêt
+        disabled:
+          $$jsExpression: >-
+            ListePrets.selection == null || !ModifierEmprunteur.value ||
+            !ModifierDateRetourPrevue.value
+        onClick:
+          $$jsExpressionAction: ModifierPret.call().then(() => GetDetailsLivre.call())
+    - component: Checkbox
+      name: CheckboxStatutPret
+      props:
+        mode: checkBox
+        label: Prêt terminé
+    - component: Button
+      name: ButtonModifierStatutPret
+      props:
+        content: Modifier le statut du prêt
+        disabled:
+          $$jsExpression: ListePrets.selection == null
+        onClick:
+          $$jsExpressionAction: ModifierStatutPret.call().then(() => {
+            GetDetailsLivre.call(); GetLivresDisponibles.refetch(); })
+    - component: Button
+      name: ButtonSupprimerPret
+      props:
+        content: Supprimer le prêt
+        disabled:
+          $$jsExpression: ListePrets.selection == null
+        onClick:
+          $$jsExpressionAction:
+            SupprimerPret.call().then(() => { GetDetailsLivre.call();
+            GetLivresDisponibles.refetch(); })
   queries:
     - name: GetLivres
       mode: query
@@ -291,7 +432,7 @@ spec:
 
               \  \"description\": parameters.description || null,\r
 
-              \  \"disponible\": parameters.disponible ?? true\r
+              \  \"disponible\": parameters.disponible \r
 
               })"
           contentType: application/json
@@ -426,6 +567,158 @@ spec:
         - name: livreId
           value:
             $$jsExpression: ListeDeLivre.selection.id
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+    - name: AjouterPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/api/bibliotheque/prets`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: POST
+        body:
+          kind: raw
+          content:
+            $$jsExpression:
+              'JSON.stringify({ "livreId": parameters.livreId, "emprunteur":
+              parameters.emprunteur, "dateRetourPrevu":
+              parameters.dateRetourPrevu })'
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: livreId
+          value:
+            $$jsExpression: selectListeLivreDisponible.value
+        - name: emprunteur
+          value:
+            $$jsExpression: AjouterEmprunteur.value
+        - name: dateRetourPrevu
+          value:
+            $$jsExpression: "AjouterDateRetourPrevu.value ? new
+              Date(AjouterDateRetourPrevu.value).toISOString().split('T')[0] :
+              null"
+    - name: ModifierPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/prets/${parameters.pr\
+            etId}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: PUT
+        body:
+          kind: raw
+          content:
+            $$jsExpression:
+              'JSON.stringify({ "emprunteur": parameters.emprunteur,
+              "dateRetourPrevue": parameters.dateRetourPrevue })'
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: pretId
+          value:
+            $$jsExpression: ListePrets.selection.id
+        - name: emprunteur
+          value:
+            $$jsExpression: ModifierEmprunteur.value
+        - name: dateRetourPrevue
+          value:
+            $$jsExpression: "ModifierDateRetourPrevue.value ? new
+              Date(ModifierDateRetourPrevue.value).toISOString().split('T')[0] :
+              null"
+    - name: ModifierStatutPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/prets/${parameters.pr\
+            etId}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: PATCH
+        body:
+          kind: raw
+          content:
+            $$jsExpression: 'JSON.stringify({ "terminer": parameters.terminer })'
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: pretId
+          value:
+            $$jsExpression: ListePrets.selection.id
+        - name: terminer
+          value:
+            $$jsExpression: CheckboxStatutPret.checked
+    - name: SupprimerPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/prets/${parameters.pr\
+            etId}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: DELETE
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: pretId
+          value:
+            $$jsExpression: ListePrets.selection.id
+    - name: GetLivresDisponibles
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/api/bibliotheque/livres/liste`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: GET
+        searchParams: []
+      parameters:
         - name: API_HOST
           value:
             $$env: TOOLPAD_API_HOST

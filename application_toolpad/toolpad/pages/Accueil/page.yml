@@ -8,12 +8,61 @@ spec:
   title: Default page
   content:
     - component: Text
+      name: textAjouterUnLivre
+      props:
+        value: Ajouter un livre
+        variant: h3
+      layout:
+        horizontalAlign: center
+    - component: TextField
+      name: AjouterTitre
+      props:
+        label: Titre
+        isRequired: true
+    - component: TextField
+      name: AjouterAuteur
+      props:
+        label: Auteur
+        isRequired: true
+    - component: TextField
+      name: AjouterIsbn
+      props:
+        label: ISBN
+        isRequired: true
+    - component: TextField
+      name: AjouterDescription
+      props:
+        label: Description
+        fullWidth: true
+    - component: Checkbox
+      name: AjouterDisponible
+      props:
+        mode: checkbox
+        label: Disponible
+        disabled: false
+    - component: Button
+      name: ButtonAjouter
+      props:
+        content: Ajouter a la bibliotheque
+        disabled:
+          $$jsExpression:
+            AjouterTitre.value ==""  || AjouterAuteur.value == "" ||
+            AjouterIsbn.value == ""
+        onClick:
+          $$jsExpressionAction: AjouterLivre.call()
+    - component: Text
       name: textListeDeLivre
       props:
         value: Liste des livres
         variant: h4
       layout:
         horizontalAlign: center
+    - component: Button
+      name: buttonRafraichir
+      props:
+        content: Rafraichir la liste
+        onClick:
+          $$jsExpressionAction: GetLivres.refetch()
     - component: Checkbox
       name: checkboxAfficherTousLesLivres
       props:
@@ -49,10 +98,13 @@ spec:
         hideToolbar: false
         loading: false
     - component: Button
-      name: buttonVoirLesDetails
+      name: buttonDetails
       props:
-        content: Voir les détails
-        onClick: null
+        content: VOIR LES DETAILS
+        onClick:
+          $$jsExpressionAction: GetDetailsLivre.call()
+        disabled:
+          $$jsExpression: ListeDeLivre.selection == null
     - component: Text
       name: textDetailLivre
       props:
@@ -81,7 +133,8 @@ spec:
     - component: TextField
       name: DescriptionLivre
       props:
-        label:
+        label: Description
+        defaultValue:
           $$jsExpression: GetDetailsLivre.data.detail.description
         fullWidth: true
     - component: TextField
@@ -91,6 +144,7 @@ spec:
         defaultValue:
           $$jsExpression: new
             Date(GetDetailsLivre.data.detail.date_ajout).toLocaleDateString('fr-CA')
+        disabled: true
     - component: TextField
       name: DateModification
       props:
@@ -98,6 +152,7 @@ spec:
         defaultValue:
           $$jsExpression: new
             Date(GetDetailsLivre.data.detail.date_modification).toLocaleDateString('fr-CA')
+        disabled: true
     - component: TextField
       name: Disponible
       props:
@@ -110,7 +165,7 @@ spec:
       name: ListePrets
       props:
         rows:
-          $$jsExpression: GetDetailsLivre.data.prets
+          $$jsExpression: "GetDetailsLivre.data == null ? [] : GetDetailsLivre.data.prets"
         columns:
           - field: id
             type: number
@@ -156,7 +211,7 @@ spec:
           value:
             $$jsExpression: "checkboxAfficherTousLesLivres.checked ? '1' : '0'"
     - name: GetDetailsLivre
-      mode: query
+      mode: mutation
       query:
         kind: rest
         url:
@@ -171,6 +226,7 @@ spec:
             },
           ]
         method: GET
+        searchParams: []
       parameters:
         - name: API_HOST
           value:
@@ -181,3 +237,54 @@ spec:
         - name: livreId
           value:
             $$jsExpression: ListeDeLivre.selection.id
+    - name: AjouterLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/api/bibliotheque/livres`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: "`${parameters.API_KEY}`"
+        method: POST
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({\r
+
+              \  \"titre\": parameters.titre,\r
+
+              \  \"auteur\": parameters.auteur,\r
+
+              \  \"isbn\": parameters.isbn,\r
+
+              \  \"description\": parameters.description || null,\r
+
+              \  \"disponible\": parameters.disponible ?? true\r
+
+              })"
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: titre
+          value:
+            $$jsExpression: AjouterTitre.value
+        - name: isbn
+          value:
+            $$jsExpression: AjouterIsbn.value
+        - name: auteur
+          value:
+            $$jsExpression: AjouterAuteur.value
+        - name: description
+          value:
+            $$jsExpression: AjouterDescription.value
+        - name: disponible
+          value:
+            $$jsExpression: AjouterDisponible.checked

@@ -7,5 +7,177 @@ spec:
     - nxOIZvJ
   title: Default page
   content:
+    - component: Text
+      name: textListeDeLivre
+      props:
+        value: Liste des livres
+        variant: h4
+      layout:
+        horizontalAlign: center
+    - component: Checkbox
+      name: checkboxAfficherTousLesLivres
+      props:
+        mode: checkBox
+        label: Tous
+        color: primary
+        size: medium
+        fullWidth: false
+      layout:
+        horizontalAlign: end
     - component: DataGrid
-      name: ListeLivre
+      name: ListeDeLivre
+      props:
+        rows:
+          $$jsExpression: GetLivres.data.livres
+        columns:
+          - field: titre
+            type: string
+            width: 182.9971466064453
+          - field: auteur
+            type: string
+            width: 173.9943084716797
+          - field: isbn
+            type: string
+            width: 162
+          - field: description
+            type: string
+            width: 317.9630432128906
+          - field: disponible
+            type: boolean
+            width: 159.99432373046875
+        density: standard
+        hideToolbar: false
+        loading: false
+    - component: Button
+      name: buttonVoirLesDetails
+      props:
+        content: Voir les détails
+        onClick: null
+    - component: Text
+      name: textDetailLivre
+      props:
+        value: Details du livre
+        variant: h4
+      layout:
+        horizontalAlign: center
+    - component: TextField
+      name: TitreLivre
+      props:
+        label: Titre
+        defaultValue:
+          $$jsExpression: GetDetailsLivre.data.detail.titre
+    - component: TextField
+      name: AuteurLivre
+      props:
+        label: Auteur
+        defaultValue:
+          $$jsExpression: GetDetailsLivre.data.detail.auteur
+    - component: TextField
+      name: IsbnLivre
+      props:
+        label: ISBN
+        defaultValue:
+          $$jsExpression: GetDetailsLivre.data.detail.isbn
+    - component: TextField
+      name: DescriptionLivre
+      props:
+        label:
+          $$jsExpression: GetDetailsLivre.data.detail.description
+        fullWidth: true
+    - component: TextField
+      name: DateAjout
+      props:
+        label: Date Ajout
+        defaultValue:
+          $$jsExpression: new
+            Date(GetDetailsLivre.data.detail.date_ajout).toLocaleDateString('fr-CA')
+    - component: TextField
+      name: DateModification
+      props:
+        label: Date Modification
+        defaultValue:
+          $$jsExpression: new
+            Date(GetDetailsLivre.data.detail.date_modification).toLocaleDateString('fr-CA')
+    - component: TextField
+      name: Disponible
+      props:
+        label: Disponible
+        defaultValue:
+          $$jsExpression:
+            "GetDetailsLivre.data.detail.disponible ? 'disponible' :
+            'indisponible'"
+    - component: DataGrid
+      name: ListePrets
+      props:
+        rows:
+          $$jsExpression: GetDetailsLivre.data.prets
+        columns:
+          - field: id
+            type: number
+            width: 52
+          - field: emprunteur
+            type: string
+            width: 254.00000762939453
+          - field: date_debut
+            type: dateTime
+            width: 235.00000762939453
+          - field: date_retour_prevue
+            type: dateTime
+            width: 245.00000762939453
+          - field: date_retour
+            type: dateTime
+            width: 226.00000762939453
+          - field: statut
+            type: string
+            width: 144.00000762939453
+  queries:
+    - name: GetLivres
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/livres/liste?tous=${p\
+            arameters.tous}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: "`${parameters.API_KEY}`"
+        method: GET
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: tous
+          value:
+            $$jsExpression: "checkboxAfficherTousLesLivres.checked ? '1' : '0'"
+    - name: GetDetailsLivre
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/livres/${parameters.l\
+            ivreId}`"
+        headers:
+          [
+            {
+              name: Authorization,
+              value: { $$jsExpression: parameters.API_KEY },
+            },
+          ]
+        method: GET
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+        - name: livreId
+          value:
+            $$jsExpression: ListeDeLivre.selection.id

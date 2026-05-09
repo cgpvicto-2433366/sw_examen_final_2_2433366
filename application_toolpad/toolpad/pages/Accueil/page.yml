@@ -98,6 +98,14 @@ spec:
         hideToolbar: false
         loading: false
     - component: Button
+      name: buttonSupprimerLivre
+      props:
+        content: Supprimer le livre
+        disabled:
+          $$jsExpression: ListeDeLivre.selection == null
+        onClick:
+          $$jsExpressionAction: SupprimerLivre.call()
+    - component: Button
       name: buttonDetails
       props:
         content: VOIR LES DETAILS
@@ -156,11 +164,33 @@ spec:
     - component: TextField
       name: Disponible
       props:
-        label: Disponible
+        disabled: true
+        label: Statut
         defaultValue:
           $$jsExpression:
             "GetDetailsLivre.data.detail.disponible ? 'disponible' :
             'indisponible'"
+    - component: Button
+      name: buttonModifierLivre
+      props:
+        content: Modifier le livre
+        onClick:
+          $$jsExpressionAction: ModifierLivre.call()
+        disabled:
+          $$jsExpression: ListeDeLivre.selection == null
+    - component: Checkbox
+      name: CheckboxStatutLivre
+      props:
+        mode: checkBox
+        label: Statut du livre
+    - component: Button
+      name: buttonModifierStatut
+      props:
+        content: Modifeir le statut
+        disabled:
+          $$jsExpression: ListeDeLivre.selection == undefined
+        onClick:
+          $$jsExpressionAction: ModifierStatutLivre.call()
     - component: DataGrid
       name: ListePrets
       props:
@@ -288,3 +318,117 @@ spec:
         - name: disponible
           value:
             $$jsExpression: AjouterDisponible.checked
+    - name: ModifierLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/livres/${parameters.l\
+            ivreId}`"
+        headers:
+          [
+            {
+              name: Authorization,
+              value: { $$jsExpression: parameters.API_KEY },
+            },
+          ]
+        method: PUT
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({\r
+
+              \  \"titre\": parameters.titre,\r
+
+              \  \"auteur\": parameters.auteur,\r
+
+              \  \"isbn\": parameters.isbn,\r
+
+              \  \"description\": parameters.description || null\r
+
+              })"
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: titre
+          value:
+            $$jsExpression: TitreLivre.value
+        - name: auteur
+          value:
+            $$jsExpression: AuteurLivre.value
+        - name: isbn
+          value:
+            $$jsExpression: IsbnLivre.value
+        - name: description
+          value:
+            $$jsExpression: DescriptionLivre.value
+        - name: livreId
+          value:
+            $$jsExpression: ListeDeLivre.selection.id
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+    - name: ModifierStatutLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/livres/${parameters.l\
+            ivreId}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: PATCH
+        searchParams: []
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({\r
+
+              \  \"disponible\": parameters.statut\r
+
+              })"
+          contentType: application/json
+      parameters:
+        - name: livreId
+          value:
+            $$jsExpression: ListeDeLivre.selection.id
+        - name: statut
+          value:
+            $$jsExpression: CheckboxStatutLivre.checked
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY
+    - name: SupprimerLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/api/bibliotheque/livres/${parameters.l\
+            ivreId}`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.API_KEY
+        method: DELETE
+        searchParams: []
+      parameters:
+        - name: livreId
+          value:
+            $$jsExpression: ListeDeLivre.selection.id
+        - name: API_HOST
+          value:
+            $$env: TOOLPAD_API_HOST
+        - name: API_KEY
+          value:
+            $$env: TOOLPAD_API_KEY

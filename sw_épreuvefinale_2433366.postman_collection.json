@@ -144,7 +144,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"titre\": \"Test\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"test\"\r\n}",
+              "raw": "{\r\n  \"titre\": \"Test\",\r\n  \"auteur\": \"Robert C. Martin\",\r\n  \"isbn\": \"978-0132350838\",\r\n  \"description\": \"test\",\r\n  \"disponible\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -251,7 +251,7 @@
           "response": []
         },
         {
-          "name": "Modifier statut un livre en prets pour le rendre disponible (echec car il est fait manuellement)",
+          "name": "Modifier statut un livre en prets pour le rendre disponible (echec)",
           "request": {
             "method": "PATCH",
             "header": [

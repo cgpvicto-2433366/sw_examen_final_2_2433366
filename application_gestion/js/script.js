@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/api/bibliotheque/utilisateurs';
+const API = 'https://sw-epreuve-final-2433366.onrender.com/api/bibliotheque/utilisateurs'; 
 
 const nomInput = document.getElementById('nom');
 const emailCreation = document.getElementById('email-creation');

@@ -328,7 +328,7 @@ spec:
     - component: DatePicker
       name: ModifierDateRetourPrevue
       props:
-        label: Nouvelle date de retour
+        label: Nouvelle date de retour prévue
     - component: Button
       name: ButtonModifierPret
       props:

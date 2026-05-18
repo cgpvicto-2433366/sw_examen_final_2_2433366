@@ -33,7 +33,7 @@ CREATE TABLE livres(
 	auteur VARCHAR(100) NOT NULL,
 	isbn VARCHAR(20) NOT NULL UNIQUE,
 	date_ajout DATE default CURRENT_DATE,
-	date_modification  DATE default CURRENT_DATE,
+	date_modification  DATE default CURRENT_DATE, -- champ ajouté
 	disponible BOOLEAN default true,
 	description TEXT -- champ ajouté
 );
@@ -48,33 +48,30 @@ CREATE TABLE prets(
 	-- source: https://www.postgresql.org/docs/current/tutorial-fk.html
 	livre_id INT REFERENCES livres(id),
 	emprunteur VARCHAR(100) NOT NULL,
-	statut BOOLEAN DEFAULT false, -- false si le pret est en cours et true dans si il est terminé
+	statut BOOLEAN DEFAULT false, -- false si le pret est en cours et true dans si il est terminé (champ ajouté)
 	date_debut DATE DEFAULT CURRENT_DATE, -- champ ajouté
-	date_retour_prevue DATE NOT NULL,
+	date_retour_prevue DATE NOT NULL, -- champ ajouté
 	date_retour DATE
 );
 
 
--- verifier la creation des tables dans la bd
-SELECT table_name 
-FROM information_schema.tables 
-WHERE table_schema = 'public'
-ORDER BY table_name;
-
-
 -- DONNÉES INITIALES
 
--- bibliothèques
--- mot de passe: Qwerty1234. Hasher avec: https://bcrypt-generator.com/
--- cle_api generer par claude IA
+/**
+* 1. Insertion des bibliothèques
+*    Mot de passe: Qwerty1234
+*	 Hasher avec: https://bcrypt-generator.com/
+*    Cle d'api des bibliothèques généra par Claude IA
+*/
 INSERT INTO bibliotheques (nom, courriel, cle_api, password) VALUES
 ('Bibliothèque de Victoriaville', 'victoriaville@bibliotheque.qc.ca', '550e8400-e29b-41d4-a716-446655440000', '$2a$12$NtMazsbaCtrfjVuErqGq/ueq1eyPQ0wIIzXkyWyatrcSbhmyFAfDO'),
 ('Bibliothèque de Québec', 'quebec@bibliotheque.qc.ca', '6ba7b810-9dad-11d1-80b4-00c04fd430c8', '$2a$12$NtMazsbaCtrfjVuErqGq/ueq1eyPQ0wIIzXkyWyatrcSbhmyFAfDO');
 
--- livres
--- Données généré par claude IA
--- 2. INSERTION DES LIVRES (10 par bibliothèque)
--- Bibliothèque 1 (Victoriaville) - IDs 1 à 10
+/**
+* 2. Insertion des livres
+*	 10 livres par bibliotheques
+*	 source: Donnée généré par claude IA dans une conversation
+*/
 INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, description) VALUES
 (1, 'Clean Code', 'Robert C. Martin', '978-0132350884', false, 'Guide de bonnes pratiques en programmation'), -- Prêté
 (1, 'The Pragmatic Programmer', 'David Thomas', '978-0135957059', false, 'Conseils pour les développeurs'),           -- Prêté
@@ -87,7 +84,6 @@ INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, descriptio
 (1, 'Soft Skills', 'John Sonmez', '978-1617292392', true, 'Le guide de vie du développeur'),
 (1, 'Rust in Action', 'Tim McNamara', '978-1617297120', true, 'Programmation système moderne');
 
--- Bibliothèque 2 (Victoriaville) - IDs 11 à 20
 INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, description) VALUES
 (2, 'Introduction aux algorithmes', 'Thomas H. Cormen', '978-0262033848', false, 'Référence en algorithmique'), -- Prêté
 (2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', '978-2070612758', false, 'Conte philosophique'),            -- Prêté
@@ -100,8 +96,11 @@ INSERT INTO livres (bibliotheque_id, titre, auteur, isbn, disponible, descriptio
 (2, 'Database Systems', 'Thomas Connolly', '978-0321523068', true, 'Conception de bases de données'),
 (2, 'Artificial Intelligence', 'Stuart Russell', '978-0136042594', true, 'Fondements de l''IA');
 
--- prêts
--- Données généré par claude IA
+/**
+* 3. Insertion des prêts
+*	 6 prets par bibliothèques dont 03 en cours et 03 terminé
+*	 source: Donnée généré par claude IA dans une conversation
+*/
 INSERT INTO prets (livre_id, emprunteur, statut, date_debut, date_retour_prevue, date_retour) VALUES
 (1, 'Alice Tremblay', false, '2026-05-01', '2026-05-15', NULL),          -- En cours
 (2, 'Jean Beliveau', false, '2026-05-02', '2026-05-16', NULL),           -- En cours
